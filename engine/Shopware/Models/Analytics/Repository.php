@@ -1370,7 +1370,7 @@ class Repository
             ->innerJoin('details', 's_order', 'orders', 'orders.id = details.orderID')
             ->andWhere('orders.status NOT IN (-1, 4)')
             ->andWhere('details.modus = 0')
-            ->groupBy('articles.id')
+            ->groupBy('ordernumber')
             ->orderBy('sales', 'DESC');
 
         $this->addDateRangeCondition($builder, $from, $to, 'orders.ordertime');
