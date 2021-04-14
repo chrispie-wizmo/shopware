@@ -1363,11 +1363,12 @@ class Repository
         $builder->select([
             'SUM(details.quantity) AS sales',
             'articles.name',
-            'details.articleordernumber as ordernumber',
+            'sad.ordernumber as ordernumber',
         ])
             ->from('s_order_details', 'details')
             ->innerJoin('details', 's_articles', 'articles', 'articles.id = details.articleID')
             ->innerJoin('details', 's_order', 'orders', 'orders.id = details.orderID')
+            ->innerJoin('articles', 's_articles_details', 'sad', 'articles.id = sad.articleID')
             ->andWhere('orders.status NOT IN (-1, 4)')
             ->andWhere('details.modus = 0')
             ->groupBy('articles.id')
